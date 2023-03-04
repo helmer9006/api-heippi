@@ -1,0 +1,17 @@
+.idea/encodings.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/workspace.xml
+.idea/
+/node_modules/*
+node_modules/*
+dist/*
+public/
+uploads/*
+.env
+*.pre
+*.dev
+yarn.lock
+*.log
+*.log
+*.log
