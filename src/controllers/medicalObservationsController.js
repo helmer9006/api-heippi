@@ -5,12 +5,9 @@ import { User } from "../models/User.js";
 import { Specialty } from "../models/specialty.js";
 import xl from "excel4node";
 import path, { dirname } from "path";
-import { fileURLToPath } from "url";
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
 export const createMedicalObservations = async (req, res) => {
   try {
-    debugger;
     console.log("POST - MEDICAL OBSERVATIONS");
     //validate error
     const errores = validationResult(req);
@@ -67,7 +64,6 @@ export const createMedicalObservations = async (req, res) => {
 
 export const getMedicalObservations = async (req, res) => {
   try {
-    debugger;
     const { data: userAuth } = req.user;
     let medicalObservationsAll = [];
     switch (userAuth.typeUser) {
@@ -296,7 +292,6 @@ export const reportPatients = async (req, res) => {
       firstRow = firstRow + 1;
     }
 
-    console.log(__dirname);
     const pathFile = path.join(`./public/xlsx/${filename}.xlsx`);
     console.log("pathFile", pathFile);
     // reg data at file

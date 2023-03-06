@@ -10,5 +10,4 @@ async function main() {
     console.log("Unable to connect to the database", error);
   }
 }
-
 main();
