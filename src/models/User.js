@@ -1,6 +1,5 @@
 import { DataTypes, Sequelize } from "sequelize";
 import { sequelize } from "../database/database.js";
-import { Doctor } from "./Doctor.js";
 import { Specialty } from "./specialty.js";
 export const User = sequelize.define(
   "User",
@@ -89,6 +88,7 @@ User.belongsTo(User, {
     name: "createdBy",
     allowNull: true,
   },
+  as: "hospital",
 });
 
 User.belongsTo(Specialty, {

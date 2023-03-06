@@ -15,10 +15,10 @@ router.post(
   auth,
   createSpecialty
 );
-// delete specialty
+// get specialty
 router.get("/all", getAllSpecialty);
 
 // delete specialty
-router.get("/delete/:id", auth, deleteSpecialty);
+router.delete("/delete/:id", auth, deleteSpecialty);
 
 export default router;

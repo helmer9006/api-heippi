@@ -67,6 +67,7 @@ router.post(
       "The specialtyId is numeric and is required"
     ).isNumeric(),
   ],
+  auth,
   createTypeDoctor
 );
 

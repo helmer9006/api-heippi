@@ -3,6 +3,7 @@ import cors from "cors";
 import usersRoutes from "./routes/user.js";
 import authRoutes from "./routes/auth.js";
 import specialtyRoutes from "./routes/specialty.js";
+import MedicalObservationsRoutes from "./routes/medical_observations.js";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
 const __filename = fileURLToPath(import.meta.url);
@@ -18,8 +19,9 @@ app.use(express.urlencoded({ limit: "100mb", extended: true }));
 app.use(cors());
 
 // routes
-app.use("/public", express.static(`./public`)); // Habilitar carpeta publica
+app.use("/public", express.static(`./public`));
 app.use("/api/users", usersRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/specialty", specialtyRoutes);
+app.use("/api/medicalObservations", MedicalObservationsRoutes);
 export default app;

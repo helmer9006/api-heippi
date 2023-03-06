@@ -1,5 +1,7 @@
 import { DataTypes, Sequelize } from "sequelize";
 import { sequelize } from "../database/database.js";
+import { Specialty } from "./specialty.js";
+import { User } from "./User.js";
 
 export const MedicalObservations = sequelize.define(
   "MedicalObservations",
@@ -22,7 +24,7 @@ export const MedicalObservations = sequelize.define(
       allowNull: false,
     },
     age: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: true,
     },
     weight: {
@@ -35,10 +37,41 @@ export const MedicalObservations = sequelize.define(
     },
     doctorId: {
       type: DataTypes.INTEGER,
-      allowNull: true,
+      allowNull: false,
+    },
+    specialtyId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    patientId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
     },
   },
   {
     timestamps: true,
   }
 );
+
+MedicalObservations.belongsTo(User, {
+  foreignKey: {
+    name: "doctorId",
+    allowNull: true,
+  },
+  as: "doctor",
+});
+
+MedicalObservations.belongsTo(User, {
+  foreignKey: {
+    name: "patientId",
+    allowNull: true,
+  },
+  as: "patient",
+});
+
+MedicalObservations.belongsTo(Specialty, {
+  foreignKey: {
+    name: "specialtyId",
+    allowNull: true,
+  },
+});

@@ -57,6 +57,7 @@ export const authenticateUser = async (req, res, next) => {
       identification: userFound.identification,
       active: userFound.active,
       email: userFound.email,
+      specialtyId: userFound.specialtyId,
     });
     userFound.dataValues.token = token;
     // return firstAccessDoctor to redirect user to change password in frontend

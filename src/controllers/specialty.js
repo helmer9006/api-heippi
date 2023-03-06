@@ -13,7 +13,7 @@ export const createSpecialty = async (req, res) => {
     const { name } = req.body;
     const { data } = req.user;
     if (data.typeUser !== Constants.TYPE_USER.HOSPITAL) {
-      return res.status(500).json({
+      return res.status(403).json({
         status: false,
         response: {},
         msg: "Error at privileges, cannot create specialty",
@@ -103,7 +103,7 @@ export const deleteSpecialty = async (req, res) => {
         msg: "The specialty not exists",
       });
     }
-    const SpecialtyDelete = await specialtyReg.destroy({ id });
+    const SpecialtyDelete = await specialtyReg.destroy();
     console.log(SpecialtyDelete);
     if (!SpecialtyDelete) {
       return res.json({
@@ -120,8 +120,10 @@ export const deleteSpecialty = async (req, res) => {
   } catch (error) {
     console.log(error);
     console.log(error);
-    res
-      .status(500)
-      .json({ status: false, response: {}, msg: "Error creating specialty" });
+    res.status(500).json({
+      status: false,
+      response: specialtyReg,
+      msg: "Error creating specialty",
+    });
   }
 };

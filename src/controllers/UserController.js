@@ -12,6 +12,7 @@ import { sendMail } from "../config/mail.config.js";
 export const createUserTypeHospitalOrPatient = async (req, res) => {
   console.log("POST - CREATE USER TYPE HOSPITAL OR PATIENT");
   try {
+    debugger;
     //validate error
     const errores = validationResult(req);
     if (!errores.isEmpty()) {
@@ -76,8 +77,8 @@ export const createUserTypeHospitalOrPatient = async (req, res) => {
     const userCreated = await User.create({
       name: req.body.name,
       password: req.body.password,
-      address: req.body.address || "",
-      services: req.body.services || "",
+      address: req.body.address || null,
+      services: req.body.services || null,
       birthdate: req.body.birthdate || null,
       identification: req.body.identification,
       phone: req.body.phone,
@@ -101,6 +102,7 @@ export const createUserTypeHospitalOrPatient = async (req, res) => {
       identification: userCreated.identification,
       active: userCreated.active,
       email: userCreated.email,
+      specialtyId: userCreated.specialtyId,
     });
     // enviar email con código
     fs.readFile(
@@ -143,7 +145,7 @@ export const createTypeDoctor = async (req, res) => {
       });
     }
     // data is user authenticated
-    const { data } = req.user.data.createdBy;
+    const { data: userAuth } = req.user;
 
     const {
       name,
@@ -157,7 +159,7 @@ export const createTypeDoctor = async (req, res) => {
       typeUser,
       specialtyId,
     } = req.body;
-    if (data.typeUser != Constants.TYPE_USER.HOSPITAL) {
+    if (userAuth.typeUser != Constants.TYPE_USER.HOSPITAL) {
       return res.json({
         status: false,
         response: userReg,
@@ -195,7 +197,7 @@ export const createTypeDoctor = async (req, res) => {
       typeUser: req.body.typeUser,
       codeActivation: Math.floor(Math.random() * 1000000 + 1),
       specialtyId: req.body.specialtyId,
-      createdBy: createdBy,
+      createdBy: userAuth.id,
     });
     if (!userCreated) {
       return res.json({
@@ -213,6 +215,7 @@ export const createTypeDoctor = async (req, res) => {
       identification: userCreated.identification,
       active: userCreated.active,
       email: userCreated.email,
+      specialtyId: userCreated.specialtyId,
     });
     // enviar email con código
     fs.readFile(
