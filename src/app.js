@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import usersRoutes from "./routes/user.js";
 import authRoutes from "./routes/auth.js";
+import specialtyRoutes from "./routes/specialty.js";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
 const __filename = fileURLToPath(import.meta.url);
@@ -20,4 +21,5 @@ app.use(cors());
 app.use("/public", express.static(`./public`)); // Habilitar carpeta publica
 app.use("/api/users", usersRoutes);
 app.use("/api/auth", authRoutes);
+app.use("/api/specialty", specialtyRoutes);
 export default app;
