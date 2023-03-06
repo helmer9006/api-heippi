@@ -3,6 +3,7 @@ import { check } from "express-validator";
 import {
   createMedicalObservations,
   getMedicalObservations,
+  reportPatients,
 } from "../controllers/medicalObservationsController.js";
 import { auth } from "./../middleware/auth.js";
 const router = Router();
@@ -23,5 +24,6 @@ router.post(
 
 // get reg medical observations
 router.get("/all", auth, getMedicalObservations);
+router.get("/reportPatients/:patientId", auth, reportPatients);
 
 export default router;

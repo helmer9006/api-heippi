@@ -12,7 +12,6 @@ import { sendMail } from "../config/mail.config.js";
 export const createUserTypeHospitalOrPatient = async (req, res) => {
   console.log("POST - CREATE USER TYPE HOSPITAL OR PATIENT");
   try {
-    debugger;
     //validate error
     const errores = validationResult(req);
     if (!errores.isEmpty()) {
